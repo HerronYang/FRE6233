@@ -27,14 +27,14 @@ namespace fre::ho_lee {
 	// Return mean and standard deviation of log D_t(u).
 	inline std::normal_distribution<double> logD(double φ, double σ, double t, double u)
 	{
-		return std::normal_distribution(-φ * (u - t) + σ * σ * pow(u - t, 3) / 6, pow(σ * (u - t), 2) * t);
+		return std::normal_distribution(-φ * (u - t) + σ * σ * pow(u - t, 3) / 6, std::sqrt(pow(σ * (u - t), 2) * t));
 	}
 
 	// φ(u) - f_t(u) = sigma^2 * (u-t)^2/2 - sigma * B_t
 	// Return mean and standard deviation of φ_t(u) - f_t(u)
 	inline std::normal_distribution<double> convexity(double σ, double t, double u)
 	{
-		return std::normal_distribution(σ * σ * (u - t) * (u - t) / 2, σ * σ * t);
+		return std::normal_distribution(σ * σ * (u - t) * (u - t) / 2, std::sqrt(σ * σ * t));
 	}
 
 } // namespace fre::ho_lee
